@@ -1,0 +1,10 @@
+backend/runtime/*
+!backend/runtime/.gitignore
+frontend/runtime/*
+!frontend/runtime/.gitignore
+.project
+*.bak
+
+!frontend/runtime/.gitignore
+
+.idea
