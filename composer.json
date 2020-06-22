@@ -12,7 +12,11 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
+<<<<<<< HEAD
     "minimum-stability": "stable",
+=======
+    "minimum-stability": "dev",
+>>>>>>> 83b9b225a7243966e1a76dd14f26adc173d1d125
     "require": {
         "php": ">=5.6.0",
         "yiisoft/yii2": "~2.0.14",

@@ -33,7 +33,11 @@ class SignupForm extends Model
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
+<<<<<<< HEAD
             ['password', 'string', 'min' => 6],
+=======
+            ['password', 'string', 'min' => 12],
+>>>>>>> 83b9b225a7243966e1a76dd14f26adc173d1d125
         ];
     }
 
