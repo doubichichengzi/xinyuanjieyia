@@ -258,7 +258,7 @@ class User extends Component
                 $log = "User '$id' logged in from $ip. Session not enabled.";
             }
 
-            $this->regenerateCsrfToken();
+        //    $this->regenerateCsrfToken();
 
             Yii::info($log, __METHOD__);
             $this->afterLogin($identity, false, $duration);

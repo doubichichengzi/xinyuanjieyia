@@ -60,7 +60,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        //$this->redirect(array('/gakki/index'));
+        if(!\Yii::$app->user->isGuest) {
+            $this->redirect(array('/gakki/index'));
+        }
+        //return $this->render('index');
     }
 
     /**
@@ -73,10 +77,13 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
+        var_dump(Yii::$app->user->isGuest);
+        var_dump($_COOKIE);
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+
+            return $this->actionIndex();
         } else {
             $model->password = '';
 

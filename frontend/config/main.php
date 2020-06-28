@@ -5,13 +5,14 @@ $params = array_merge(
     require __DIR__ . '/params.php',
     require __DIR__ . '/params-local.php'
 );
-
+$db = require(__DIR__ . '/../../common/config/db.php');
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'db' => $db,
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
