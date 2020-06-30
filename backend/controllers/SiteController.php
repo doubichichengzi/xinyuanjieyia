@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\components\BaseController;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -10,7 +11,7 @@ use common\models\LoginForm;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends BaseController
 {
     /**
      * {@inheritdoc}
@@ -61,8 +62,11 @@ class SiteController extends Controller
     public function actionIndex()
     {
         //$this->redirect(array('/gakki/index'));
+       // var_dump(Yii::$app->user->isGuest);
+
         if(!\Yii::$app->user->isGuest) {
-            $this->redirect(array('/gakki/index'));
+
+            $this->redirect('/gakki/index')->send();
         }
         //return $this->render('index');
     }
@@ -74,19 +78,34 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+
         var_dump(Yii::$app->user->isGuest);
-        var_dump($_COOKIE);
+        echo 123;
+        if (!\Yii::$app->user->isGuest) {
+
+
+            return $this->goHome()->send();
+        }
+
+
+//        var_dump($_COOKIE);
         $model = new LoginForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ( Yii::$app->request->isPost) {
+            if($model->load(Yii::$app->request->post()) && $model->login()){
+                //Yii::$app->getSession()->setFlash('error',$model->errmsg);
+                    echo 123;
+                return $this->goBack()->send();
+            }else{
+                Yii::$app->getSession()->setFlash('error',$model->errmsg);
+                return $this->render('login', [
+                    'model' => $model,
+                ]);
+            }
 
-            return $this->actionIndex();
+         //   return $this->actionIndex();
         } else {
             $model->password = '';
-
             return $this->render('login', [
                 'model' => $model,
             ]);
